@@ -12,22 +12,14 @@ productsRouter.get('/:id', (req, res) => {
 });
 
 productsRouter.post('/create', async (req, res) => {
-  res.json(req.body);
-  /*try {
-    const newProduct = await Product.create({
-      name: "Salida 1",
-      description: "Salida de playa verde",
-      sale: 50.5,
-      price: 70.1,
-      stock: 14,
-      createdAt: Date.now(),
-    });
+  const data = res.json(req.body);
+  try {
+    const newProduct = await Product.create(data);
     res.send(newProduct)
   } catch(err) {
     console.log(err)
     res.send(err)
-  }*/
-  
+  }
 });
 
 module.exports = productsRouter;
