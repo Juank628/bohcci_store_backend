@@ -12,8 +12,8 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use('/dbAdmin', databaseRouter);
 app.use('/products', productsRouter);
