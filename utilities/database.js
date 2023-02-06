@@ -1,6 +1,5 @@
+require('dotenv').config()
 const { Sequelize } = require('sequelize');
-const { dbConnectionUrl } = require('./secrets')
-
-const sequelize = new Sequelize(dbConnectionUrl)
+const sequelize = new Sequelize(process.env.DB_URL)
 
 module.exports = sequelize
