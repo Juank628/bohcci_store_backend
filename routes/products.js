@@ -4,7 +4,14 @@ const productsRouter = express.Router();
 
 productsRouter.get('/', async (req, res) => {
   const products = await Product.findAll();
-  res.json(products)
+  const adaptedProducts = products.map(product => {
+    console.log(product.dataValues.stock)
+    return({
+      ...product.dataValues,
+      stock: JSON.parse(product.dataValues.stock)
+    })
+  })
+  res.json(adaptedProducts);
 });
 
 productsRouter.get('/:id', (req, res) => {
@@ -12,22 +19,18 @@ productsRouter.get('/:id', (req, res) => {
 });
 
 productsRouter.post('/create', async (req, res) => {
-  res.json(req.body);
-  /*try {
-    const newProduct = await Product.create({
-      name: "Salida 1",
-      description: "Salida de playa verde",
-      sale: 50.5,
-      price: 70.1,
-      stock: 14,
-      createdAt: Date.now(),
-    });
-    res.send(newProduct)
+  const productData = req.body;
+  const adaptedProduct = {
+    ...productData,
+    stock: JSON.stringify(productData.stock)
+  }
+  try {
+    const newProduct = await Product.create(adaptedProduct);
+    res.json(newProduct)
   } catch(err) {
     console.log(err)
     res.send(err)
-  }*/
-  
+  }
 });
 
 module.exports = productsRouter;

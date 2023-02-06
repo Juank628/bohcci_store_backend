@@ -6,7 +6,8 @@ const Product = sequelize.define('Product', {
   description: DataTypes.STRING,
   sale: DataTypes.FLOAT,
   price: DataTypes.FLOAT,
-  stock: DataTypes.INTEGER,
+  stock: DataTypes.TEXT,
+  family: DataTypes.STRING,
 });
 
 module.exports = Product;
