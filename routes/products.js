@@ -5,7 +5,6 @@ const productsRouter = express.Router();
 productsRouter.get('/', async (req, res) => {
   const products = await Product.findAll();
   const adaptedProducts = products.map(product => {
-    console.log(product.dataValues.stock)
     return({
       ...product.dataValues,
       stock: JSON.parse(product.dataValues.stock)
